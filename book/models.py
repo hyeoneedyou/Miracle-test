@@ -8,7 +8,6 @@ class Book(models.Model):
     start_days = models.IntegerField(default=0)
     continuity_days = models.IntegerField(default=0)
     success_days = models.IntegerField(default=0)
-    book_name = models.CharField(max_length=50)
     total_page = models.IntegerField(default=0)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
@@ -16,5 +15,6 @@ class Book(models.Model):
 class Certify(models.Model):
     goal = models.ForeignKey(Book, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now=True)
+    book_name = models.CharField(max_length=50, null=True)
     fulfill_page = models.IntegerField(default=0)
     achievement = models.BooleanField(default=False)

@@ -1,3 +1,5 @@
 from django.contrib import admin
+from .models import Health, Certify
 
-# Register your models here.
+admin.site.register(Health)
+admin.site.register(Certify)

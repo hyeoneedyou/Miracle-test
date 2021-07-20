@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% load static %}
+    <p> 이름: {{ goal.name }}</p>
+    <p> 시작 날짜: {{ goal.created }}</p>
+    {% for certify_date in certify_dates %}
+        {{certify_date}}
+    {% endfor%}
+    <p> 시작: {{ start_days }}</p>
+    <p> 성공 날짜: {{ success_days }}</p>
+    <p> 연속 날짜: {{ continuity_days}}</p>
+    {% for certify in certifys %}
+        <p> 인증 날짜: {{ certify.created }}</p>
+        <p> 성공 여부: {{ certify.achievement }}</p>
+        <p> 실천 시간: {{ certify.fulfill_hour }}시간 {{ certify.fulfill_minute }}분</p>
+
+    {% endfor %}
+
+        
+</body>
+</html>
