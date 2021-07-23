@@ -1,10 +1,11 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Health, Certify
 from datetime import datetime, timedelta
+import datetime
 
 def main(request, id):
     goal = get_object_or_404(Health, pk = id)
-    start_days = (datetime.now() - goal.created).days + 1
+    start_days = (datetime.date.today() - goal.created).days + 1
     success_days = goal.certifys.filter(achievement=True).count()
     certifys = goal.certifys.all()
     certify_dates = []
@@ -12,14 +13,16 @@ def main(request, id):
         certify_date = certify.created.strftime('%m/%d')
         certify_dates.append(certify_date)
     continuity_days = 0
-    # for i in range(certifys.count()):
-    #     date = datetime.now() - timedelta(days=i)
-    #     certify = goal.certifys.filter(created=date)
-    #     if certify.achievement == True:
-    #         continuity_days += 1
-    #         continue
-    #     else:
-    #         break
+    for i in range(certifys.count()):
+        date = datetime.date.today() - timedelta(days=i)
+        date_certify = goal.certifys.filter(created=date)
+        if date_certify.first().achievement:
+            continuity_days += 1
+            continue
+        else:
+            break
+            
+            
     context = {
         'goal': goal,
         'start_days': start_days,
